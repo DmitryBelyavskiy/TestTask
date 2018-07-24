@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#75a1e7</color>
+    <color name="colorPrimaryDark">#4787ef</color>
+    <color name="colorAccent">#b1c4ea</color>
+    <color name="color_splash_text">#CC2D8FCC</color>
+    <color name="color_mtext">#1b4383</color>
+    <color name="color_mtext_hint">#a3b8de</color>
+    <color name="color_bt_login">#1b4383</color>
+    <color name="color_bt_login_pressed">#54719e</color>
+    <color name="color_text_btn">#ffffff</color>
+
+    <color name="color_test">#c90c2f</color>
+    <color name="color_text_in_prof">#75a1e7</color>
+
+</resources>

@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">AndroidTestTask</string>
+    <string name="SplashTextScreen">Test Task Goozix</string>
+    <string name="text_username">UserName:</string>
+    <string name="text_your_username">Your UserName</string>
+    <string name="text_password">Password:</string>
+    <string name="text_your_password">Your password</string>
+    <string name="text_log_in">LOG IN</string>
+    <string name="logo_base_inf_activ">BaseInfActivity</string>
+    <string name="logo_frag_user_list">Fragment UserList</string>
+    <string name="logo_frag_your_profile">Fragment Your Profile</string>
+
+    <string name="users_list">Users List</string>
+    <string name="your_profile">Your Profile</string>
+
+    <string name="err_of_auth">Error of authentication</string>
+    <string name="err_of_getListUs">Error of getting list users</string>
+    <string name="err_of_get_Profile_User">Failed to load user profile</string>
+
+    <string name="total_pr_repos_count">Total private repositories count:</string>
+    <string name="own_pr_repos_count">Owned private repositores count:</string>
+    <string name="tx_email">Email:</string>
+    <string name="tx_login">Login:</string>
+    <string name="tx_name">Name:</string>
+    <string name="tx_comp">Company:</string>
+
+
+    <string name="menu_item_search">Search...</string>
+    <string name="menu_item_logout">Logout</string>
+    <string name="search_by_login">Serch by login</string>
+    <string name="detailed_information">detailed information of user from list</string>
+    <string name="go_to_rep">list of repositories</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="private_gists_count">Private gists count:</string>
+    <string name="name_rep">Name:</string>
+    <string name="description_rep">Description:</string>
+    <string name="open_in_browser">Open in browser</string>
+
+
+</resources>
