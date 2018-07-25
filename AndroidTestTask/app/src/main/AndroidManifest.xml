@@ -21,12 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.authentication.AuthActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.basic_information.BaseInfActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.detailed_information.UserInformationActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.authentication.AuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.basic_information.BaseInfActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.detailed_information.UserInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.user_repositories.UserRepositoriesActivity"></activity>
     </application>
 
 </manifest>

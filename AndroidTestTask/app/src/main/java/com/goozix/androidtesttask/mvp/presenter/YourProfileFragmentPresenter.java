@@ -1,7 +1,6 @@
 package com.goozix.androidtesttask.mvp.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
 import com.goozix.androidtesttask.R;
 import com.goozix.androidtesttask.application.MyTestApplication;
 import com.goozix.androidtesttask.mvp.model.Model;
@@ -20,24 +19,31 @@ public class YourProfileFragmentPresenter extends BasePresenter<YourProfileFragm
 
     @Inject
     Model mModel;
-    User user;
+    private User user;
+    private boolean isMyProfile;
 
     public YourProfileFragmentPresenter(User user) {
         this.user = user;
+        /*if(user==null){
+            isMyProfile=true;
+        }*/
+        isMyProfile =user==null;
         MyTestApplication.getAppComponent().inject(this);
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        if (user == null) {
+        if (isMyProfile) {//user == null
             getViewState().changeVisibilityItems();
             //снять невидимость, будет отображаться расширенный профиль
             loadProfileData();
 
+
             //перенести вызов в loadProfileData();
            // getViewState().showItemUserData(user, true);//если true заполняем расширенный профиль
         } else {
+            //mUserLogin =user.getLogin();//для отправки в репозиторий лист
             getViewState().hideProgressBar();
             getViewState().showLayoutProfile();
             getViewState().showItemUserData(user, false);
@@ -87,5 +93,13 @@ public class YourProfileFragmentPresenter extends BasePresenter<YourProfileFragm
     public void logout() {
         mModel.removeUserToken();
         getViewState().backToAuthentication();
+    }
+
+    public void buttonRepositoryListClicked(){
+
+        if(isMyProfile){getViewState().openRepositoryList(null);//отправиться либо пустой либо логин
+        }
+        else{getViewState().openRepositoryList(user.getLogin());}
+
     }
 }

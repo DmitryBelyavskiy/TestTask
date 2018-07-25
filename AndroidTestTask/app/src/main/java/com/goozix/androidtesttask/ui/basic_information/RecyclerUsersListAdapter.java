@@ -79,6 +79,9 @@ public class RecyclerUsersListAdapter extends RecyclerView.Adapter<RecyclerView.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (getAdapterPosition() == RecyclerView.NO_POSITION) {
+                        return;
+                    }
                     mListener.openUserInformation(user);//можно передать user и потом в активити передать юзера
                     //mListener.openUserInformation(user.getLogin());//можно передать user и потом в активити передать юзера
                 }

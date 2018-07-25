@@ -35,12 +35,11 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     Single<User>getUserProfile(@Header("Authorization")String token);
 
+    @GET(APIUtil.NO_AUTH_USER_REPOS)
+    Single<List<Repository>>getNoAutUserRepositoriesList(@Path("login") String login);
 
+    @GET(APIUtil.AUTH_USER_REPOS)
+    Single<List<Repository>>getAutUserRepositoriesList(@Header("Authorization")String token);
 
-//    @GET("search/users")
-//    Call<FoundUsers> getFoundUsers(@Query("q") String login, @Query("page") int page);
-//
-//    @GET("users/{login}/repos")
-//    Call<List<Repository>> getUserRepositories(@Path("login") String login);
 
 }

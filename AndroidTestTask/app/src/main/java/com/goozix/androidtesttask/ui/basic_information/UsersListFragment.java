@@ -90,7 +90,7 @@ public class UsersListFragment extends MvpAppCompatFragment implements UsersList
     @Override
     public void openUserInformation(User user) {
         Intent intent=new Intent(getContext(),UserInformationActivity.class);
-        intent.putExtra("user",user);
+        intent.putExtra("user",user);//подумать не надо ли тут парсибал
         startActivity(intent);
     }
 

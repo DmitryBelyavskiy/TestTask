@@ -20,4 +20,7 @@ public interface YourProfileFragmentView extends MvpView {
     void showLayoutProfile();
     @StateStrategyType(AddToEndStrategy.class)
     void backToAuthentication();
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void openRepositoryList(String UserLogin);
 }

@@ -7,6 +7,7 @@ import com.goozix.androidtesttask.application.MyTestApplication;
 import com.goozix.androidtesttask.mvp.model.api.ApiInterface;
 import com.goozix.androidtesttask.mvp.model.preferences.SharedPrefsModule;
 import com.goozix.androidtesttask.mvp.model.user.FoundUsers;
+import com.goozix.androidtesttask.mvp.model.user.Repository;
 import com.goozix.androidtesttask.mvp.model.user.User;
 
 import java.util.List;
@@ -33,10 +34,6 @@ public class ModelImpl implements Model {
     public Completable login(@NonNull String token) {
         return mApiInterface.login(token);
     }
-    @Override
-    public Single<User>loadProfAuthUser(@NonNull String token){
-        return mApiInterface.getUserProfile(token);
-    }
 
     @Override
     public Single<List<User>> getListUs(int lastUserId, @NonNull String login, int pageCount){
@@ -51,6 +48,20 @@ public class ModelImpl implements Model {
                         }
                     });
         }
+    }
+
+    @Override
+    public Single<List<Repository>> getListRepositories(String login) {
+        if(login!=null){//не авторизованный пользователь
+            return mApiInterface.getNoAutUserRepositoriesList(login);
+        }else{// авторизованный пользователь
+            return mApiInterface.getAutUserRepositoriesList(getUserTokenFromPrefs());//проверить чтобы так было в ост местах
+        }
+    }
+
+    @Override
+    public Single<User>loadProfAuthUser(@NonNull String token){
+        return mApiInterface.getUserProfile(token);
     }
 
     @Override

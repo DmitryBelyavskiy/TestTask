@@ -26,6 +26,7 @@ import com.goozix.androidtesttask.mvp.model.user.User;
 import com.goozix.androidtesttask.mvp.presenter.YourProfileFragmentPresenter;
 import com.goozix.androidtesttask.mvp.view.YourProfileFragmentView;
 import com.goozix.androidtesttask.ui.authentication.AuthActivity;
+import com.goozix.androidtesttask.ui.user_repositories.UserRepositoriesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +34,7 @@ import butterknife.ButterKnife;
 public class YourProfileFragment extends MvpAppCompatFragment implements YourProfileFragmentView {
 
     private static final String NULL_FIELD = "Empty";
+    private static final String LOGIN = "Login"; //вытащить в отдельный фал
 
     @InjectPresenter
     YourProfileFragmentPresenter presenter;
@@ -56,7 +58,7 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     @BindView(R.id.bt_open_repos)
     Button mBtOpenRepos;
     @BindView(R.id.bt_edit_profile)
-    Button mBtnEditRepos;
+    Button mBtnEditProfile;
 
     @BindView(R.id.ll_private_inf)
     LinearLayout mLlPrivateInfo;
@@ -72,7 +74,7 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
 
     @BindView(R.id.layout_your_profile)
     LinearLayout mLlYourProf;
-    @BindView(R.id.loading_indicator_lp)
+    @BindView(R.id.loading_indicator_profile)
     ProgressBar mLoadingIndicator;
 
     @ProvidePresenter
@@ -94,8 +96,10 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       // setHasOptionsMenu(true);//для логаута
+        // setHasOptionsMenu(true);//для логаута
         ButterKnife.bind(this, view);
+        mBtOpenRepos.setOnClickListener(oclBtnOpenRepos);
+        mBtnEditProfile.setOnClickListener(oclBtnEditProfile);
     }
 
     @Override
@@ -105,7 +109,7 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
 //        mLlPrivateTotalRepositoryCount.setVisibility(View.VISIBLE);
 //        mLlOwnedPrivateRepositoriesCount.setVisibility(View.VISIBLE);
         mLlBtnEditProfile.setVisibility(View.VISIBLE);
-        mBtnEditRepos.setEnabled(true);
+        mBtnEditProfile.setEnabled(true);
     }
 
     @Override
@@ -164,8 +168,8 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-        if(id==R.id.item_logout){
+        int id = item.getItemId();
+        if (id == R.id.item_logout) {
             presenter.logout();
         }
         return super.onOptionsItemSelected(item);
@@ -175,4 +179,28 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     public void backToAuthentication() {
         startActivity(new Intent(getActivity(), AuthActivity.class));
     }
+
+    View.OnClickListener oclBtnOpenRepos = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.buttonRepositoryListClicked();
+        }
+    };
+
+    @Override
+    public void openRepositoryList(String userLogin) {
+        Intent intent = new Intent(getContext(), UserRepositoriesActivity.class);
+        if (userLogin != null) {
+            intent.putExtra(LOGIN, userLogin);
+        }
+        startActivity(intent);
+    }
+
+    View.OnClickListener oclBtnEditProfile = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //todo: later create profile editing
+            // presenter.buttonEditProfileClicked();
+        }
+    };
 }
