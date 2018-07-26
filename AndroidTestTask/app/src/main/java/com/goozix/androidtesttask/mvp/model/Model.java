@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.goozix.androidtesttask.mvp.model.user.FoundUsers;
 import com.goozix.androidtesttask.mvp.model.user.Repository;
+import com.goozix.androidtesttask.mvp.model.user.UpdatedUser;
 import com.goozix.androidtesttask.mvp.model.user.User;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public interface Model {
 
 
     Single<User>loadProfAuthUser(@NonNull String token);
+
+    Single<User>updateUserProfile(@NonNull String token, UpdatedUser newUserData);
 
     void saveUserTokenInPrefs(String token);
 

@@ -6,6 +6,7 @@ import com.goozix.androidtesttask.mvp.model.ModelImpl;
 import com.goozix.androidtesttask.mvp.presenter.AuthActivityPresenter;
 import com.goozix.androidtesttask.mvp.presenter.BaseInfActivityPresenter;
 import com.goozix.androidtesttask.mvp.presenter.SplashActivityPresenter;
+import com.goozix.androidtesttask.mvp.presenter.UpdateProfileActivityPresenter;
 import com.goozix.androidtesttask.mvp.presenter.UserInformationActivityPresenter;
 import com.goozix.androidtesttask.mvp.presenter.UserRepositoriesActivityPresenter;
 import com.goozix.androidtesttask.mvp.presenter.UsersListFragmentPresenter;
@@ -34,6 +35,8 @@ public interface AppComponent {
     void inject(UserInformationActivityPresenter userInformationActivityPresenter);
 
     void inject(UserRepositoriesActivityPresenter userRepositoriesActivityPresenter);
+
+    void inject(UpdateProfileActivityPresenter updateProfileActivityPresenter);
 
     void inject(ModelImpl dataRepository);
 }

@@ -15,7 +15,7 @@ import com.goozix.androidtesttask.ui.basic_information.BaseInfActivity;
 public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
     @InjectPresenter
-    SplashActivityPresenter mSplashPresenter;
+    SplashActivityPresenter presenter;
 
 
     @Override

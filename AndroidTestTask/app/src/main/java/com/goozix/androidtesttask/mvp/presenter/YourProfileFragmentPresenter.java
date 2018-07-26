@@ -19,34 +19,34 @@ public class YourProfileFragmentPresenter extends BasePresenter<YourProfileFragm
 
     @Inject
     Model mModel;
-    private User user;
+    private User mUser;
     private boolean isMyProfile;
 
     public YourProfileFragmentPresenter(User user) {
-        this.user = user;
-        /*if(user==null){
+        this.mUser = user;
+        /*if(mUser==null){
             isMyProfile=true;
         }*/
-        isMyProfile =user==null;
+        isMyProfile =mUser==null;
         MyTestApplication.getAppComponent().inject(this);
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        if (isMyProfile) {//user == null
+        if (isMyProfile) {//mUser == null
             getViewState().changeVisibilityItems();
             //снять невидимость, будет отображаться расширенный профиль
             loadProfileData();
 
 
             //перенести вызов в loadProfileData();
-           // getViewState().showItemUserData(user, true);//если true заполняем расширенный профиль
+           // getViewState().showItemUserData(mUser, true);//если true заполняем расширенный профиль
         } else {
-            //mUserLogin =user.getLogin();//для отправки в репозиторий лист
+            //mUserLogin =mUser.getLogin();//для отправки в репозиторий лист
             getViewState().hideProgressBar();
             getViewState().showLayoutProfile();
-            getViewState().showItemUserData(user, false);
+            getViewState().showItemUserData(mUser, isMyProfile);
         }
     }
 
@@ -69,7 +69,8 @@ public class YourProfileFragmentPresenter extends BasePresenter<YourProfileFragm
                 .subscribe(new Consumer<User>() {
                     @Override
                     public void accept(User user) throws Exception {
-                        getViewState().showItemUserData(user, true);
+                        mUser=user;
+                        getViewState().showItemUserData(mUser, isMyProfile);
                         getViewState().hideProgressBar();
                         getViewState().showLayoutProfile();
                     }
@@ -99,7 +100,18 @@ public class YourProfileFragmentPresenter extends BasePresenter<YourProfileFragm
 
         if(isMyProfile){getViewState().openRepositoryList(null);//отправиться либо пустой либо логин
         }
-        else{getViewState().openRepositoryList(user.getLogin());}
+        else{getViewState().openRepositoryList(mUser.getLogin());}
 
+    }
+
+    public void buttonEditProfileClicked(){
+
+        getViewState().openEditProfileScreen(mUser);
+
+    }
+
+    public void updateProfile(User user){
+        mUser=user;
+        getViewState().showItemUserData(mUser, isMyProfile);
     }
 }

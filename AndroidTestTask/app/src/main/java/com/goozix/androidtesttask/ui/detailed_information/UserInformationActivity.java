@@ -15,12 +15,14 @@ import com.goozix.androidtesttask.ui.basic_information.YourProfileFragment;
 
 public class UserInformationActivity extends MvpAppCompatActivity implements UserInformationView {
 
+    private static final String USER = "user";
+
     @InjectPresenter
     UserInformationActivityPresenter presenter;
 
     @ProvidePresenter
-    UserInformationActivityPresenter provideTransactionPresenter() {
-        return new UserInformationActivityPresenter((User) getIntent().getParcelableExtra("user"));
+    UserInformationActivityPresenter provideUserInformationActivityPresenter() {
+        return new UserInformationActivityPresenter((User) getIntent().getParcelableExtra(USER));
     }
 
     @Override
@@ -32,7 +34,7 @@ public class UserInformationActivity extends MvpAppCompatActivity implements Use
     @Override
     public void loadFragmentProf(User user) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("user", user);
+        bundle.putParcelable(USER, user);
 
         YourProfileFragment frag = new YourProfileFragment();
         frag.setArguments(bundle);

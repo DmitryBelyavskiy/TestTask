@@ -33,6 +33,9 @@ import butterknife.ButterKnife;
 public class UsersListFragment extends MvpAppCompatFragment implements UsersListFragmentView,
         SwipeRefreshLayout.OnRefreshListener, OnUsersListClickListener {
 
+    private static final String USER = "user";
+
+
     @InjectPresenter
     UsersListFragmentPresenter presenter;
 
@@ -68,7 +71,7 @@ public class UsersListFragment extends MvpAppCompatFragment implements UsersList
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_by_logint, menu);
+        inflater.inflate(R.menu.search_by_login, menu);
         mSearch = (SearchView) menu.findItem(R.id.search_item).getActionView();
         initSearchView();
 
@@ -90,7 +93,7 @@ public class UsersListFragment extends MvpAppCompatFragment implements UsersList
     @Override
     public void openUserInformation(User user) {
         Intent intent=new Intent(getContext(),UserInformationActivity.class);
-        intent.putExtra("user",user);//подумать не надо ли тут парсибал
+        intent.putExtra(USER,user);
         startActivity(intent);
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,15 +27,21 @@ import com.goozix.androidtesttask.mvp.model.user.User;
 import com.goozix.androidtesttask.mvp.presenter.YourProfileFragmentPresenter;
 import com.goozix.androidtesttask.mvp.view.YourProfileFragmentView;
 import com.goozix.androidtesttask.ui.authentication.AuthActivity;
+import com.goozix.androidtesttask.ui.editing_profile.UpdateProfileActivity;
 import com.goozix.androidtesttask.ui.user_repositories.UserRepositoriesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.app.Activity.RESULT_OK;
+import static android.text.TextUtils.isEmpty;
+
 public class YourProfileFragment extends MvpAppCompatFragment implements YourProfileFragmentView {
 
+    private static final String USER = "user";
     private static final String NULL_FIELD = "Empty";
     private static final String LOGIN = "Login"; //вытащить в отдельный фал
+    private static final int REQUEST_CODE = 1; //вытащить в отдельный фал
 
     @InjectPresenter
     YourProfileFragmentPresenter presenter;
@@ -78,11 +85,11 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     ProgressBar mLoadingIndicator;
 
     @ProvidePresenter
-    YourProfileFragmentPresenter provideTransactionPresenter() {
+    YourProfileFragmentPresenter yourProfileFragmentPresenter() {
         if (getArguments() == null) {
             return new YourProfileFragmentPresenter(null);
         } else {
-            return new YourProfileFragmentPresenter((User) getArguments().getParcelable("user"));
+            return new YourProfileFragmentPresenter((User) getArguments().getParcelable(USER));
         }
     }
 
@@ -117,6 +124,8 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
         //устанавливаем соответствующие значения
         Glide.with(this).load(user.getAvatarUrl()).into(mImageAva);
         mTvLogin.setText(user.getLogin());
+        mTvName.setText((user.getName()));
+
         mTvName.setText(checkFieldForEmpty(user.getName()));
         mTvCompany.setText(checkFieldForEmpty(user.getCompany()));
         mTvEmail.setText(checkFieldForEmpty(user.getEmail()));
@@ -152,7 +161,7 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
 
 
     private String checkFieldForEmpty(String str) {
-        if (str == null) {
+        if (TextUtils.isEmpty(str)) {
             return NULL_FIELD;
         } else {
             return str;
@@ -196,11 +205,28 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
         startActivity(intent);
     }
 
+    @Override
+    public void openEditProfileScreen(User user) {
+
+        Intent intent=new Intent(getContext(),UpdateProfileActivity.class);
+        intent.putExtra(USER,user);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+if(resultCode==RESULT_OK && requestCode==REQUEST_CODE) {
+    User user = data.getParcelableExtra(USER);
+    presenter.updateProfile(user);
+}
+    }
+
     View.OnClickListener oclBtnEditProfile = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //todo: later create profile editing
-            // presenter.buttonEditProfileClicked();
+
+             presenter.buttonEditProfileClicked();
         }
     };
 }

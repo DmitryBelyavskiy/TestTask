@@ -8,6 +8,7 @@ import com.goozix.androidtesttask.mvp.model.api.ApiInterface;
 import com.goozix.androidtesttask.mvp.model.preferences.SharedPrefsModule;
 import com.goozix.androidtesttask.mvp.model.user.FoundUsers;
 import com.goozix.androidtesttask.mvp.model.user.Repository;
+import com.goozix.androidtesttask.mvp.model.user.UpdatedUser;
 import com.goozix.androidtesttask.mvp.model.user.User;
 
 import java.util.List;
@@ -63,6 +64,13 @@ public class ModelImpl implements Model {
     public Single<User>loadProfAuthUser(@NonNull String token){
         return mApiInterface.getUserProfile(token);
     }
+
+    @Override
+    public Single<User>updateUserProfile(@NonNull String token, UpdatedUser newUserData){
+        return mApiInterface.editUserProfile(token, newUserData);
+    }
+
+
 
     @Override
     public void saveUserTokenInPrefs(String token) {

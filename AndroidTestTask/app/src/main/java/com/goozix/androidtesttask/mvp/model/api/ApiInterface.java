@@ -3,6 +3,7 @@ package com.goozix.androidtesttask.mvp.model.api;
 import com.goozix.androidtesttask.mvp.model.api.util.APIUtil;
 import com.goozix.androidtesttask.mvp.model.user.FoundUsers;
 import com.goozix.androidtesttask.mvp.model.user.Repository;
+import com.goozix.androidtesttask.mvp.model.user.UpdatedUser;
 import com.goozix.androidtesttask.mvp.model.user.User;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -40,6 +43,10 @@ public interface ApiInterface {
 
     @GET(APIUtil.AUTH_USER_REPOS)
     Single<List<Repository>>getAutUserRepositoriesList(@Header("Authorization")String token);
+
+    @PATCH(APIUtil.USER)
+    Single<User> editUserProfile(@Header("Authorization")String token,@Body UpdatedUser updateInfo);
+
 
 
 }

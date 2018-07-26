@@ -36,6 +36,9 @@
     <string name="description_rep">Description:</string>
     <string name="open_in_browser">Open in browser</string>
     <string name="err_of_user_repositories_list">Error loading repository list</string>
+    <string name="update_profile">Update profile</string>
+    <string name="err_of_edit_profile_user">Error changing user profile</string>
+    <string name="user_profile_updated_successfully">User profile updated successfully</string>
 
 
 </resources>

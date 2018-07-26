@@ -30,7 +30,8 @@
         <activity
             android:name=".ui.detailed_information.UserInformationActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.user_repositories.UserRepositoriesActivity"></activity>
+        <activity android:name=".ui.user_repositories.UserRepositoriesActivity" />
+        <activity android:name=".ui.editing_profile.UpdateProfileActivity"></activity>
     </application>
 
 </manifest>

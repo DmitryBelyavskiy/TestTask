@@ -121,6 +121,7 @@ public class User implements Parcelable{
     @Expose
     private Plan plan;
 
+
     public String getLogin() {
         return login;
     }
@@ -465,6 +466,11 @@ public class User implements Parcelable{
     }
 
     public User() {
+
+            name="";
+            company="";
+            email="";
+
     }
 
     protected User(Parcel in) {
