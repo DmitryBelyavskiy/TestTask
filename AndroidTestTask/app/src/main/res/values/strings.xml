@@ -29,7 +29,7 @@
     <string name="menu_item_logout">Logout</string>
     <string name="search_by_login">Serch by login</string>
     <string name="detailed_information">detailed information of user from list</string>
-    <string name="go_to_rep">list of repositories</string>
+    <string name="go_to_rep">Repositories</string>
     <string name="edit_profile">Edit profile</string>
     <string name="private_gists_count">Private gists count:</string>
     <string name="name_rep">Name:</string>
@@ -39,6 +39,7 @@
     <string name="update_profile">Update profile</string>
     <string name="err_of_edit_profile_user">Error changing user profile</string>
     <string name="user_profile_updated_successfully">User profile updated successfully</string>
+    <string name="limited_by_privacy_settings">Limited by privacy settings</string>
 
 
 </resources>

@@ -15,13 +15,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name_rep" />
+            android:text="@string/name_rep"
+            android:textColor="@color/color_text_in_prof" />
 
         <TextView
             android:id="@+id/text_name_rep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/color_mtext" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,26 +34,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/description_rep" />
+            android:text="@string/description_rep"
+            android:textColor="@color/color_text_in_prof" />
 
         <TextView
             android:id="@+id/text_description_rep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/color_mtext" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:gravity="right">
 
         <Button
             android:id="@+id/button_open_repository_in_browser"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/open_in_browser" />
+            android:layout_height="25dp"
+            android:background="@drawable/btn_other"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/open_in_browser"
+            android:textColor="@color/color_text_btn" />
     </LinearLayout>
 
 </LinearLayout>

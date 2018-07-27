@@ -241,8 +241,12 @@
                     <Button
                         android:id="@+id/bt_open_repos"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/go_to_rep" />
+                        android:layout_height="35dp"
+                        android:background="@drawable/btn_other"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/go_to_rep"
+                        android:textColor="@color/color_text_btn" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -257,9 +261,13 @@
                     <Button
                         android:id="@+id/bt_edit_profile"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
+                        android:background="@drawable/btn_other"
                         android:enabled="false"
-                        android:text="@string/edit_profile" />
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/edit_profile"
+                        android:textColor="@color/color_text_btn" />
 
                 </LinearLayout>
             </LinearLayout>

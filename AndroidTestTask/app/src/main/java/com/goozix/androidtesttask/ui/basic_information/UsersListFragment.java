@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -29,6 +30,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
 public class UsersListFragment extends MvpAppCompatFragment implements UsersListFragmentView,
         SwipeRefreshLayout.OnRefreshListener, OnUsersListClickListener {
@@ -84,10 +87,12 @@ public class UsersListFragment extends MvpAppCompatFragment implements UsersList
 
     private void initRecycler() {
         mLayoutManager = new LinearLayoutManager(getContext());
+        DividerItemDecoration itemDecoration=new DividerItemDecoration(getContext(),VERTICAL );
         mAdapter = new RecyclerUsersListAdapter(this);
         mRecycler.setLayoutManager(mLayoutManager);
         mRecycler.setAdapter(mAdapter);
         mRecycler.addOnScrollListener(new RecyclerAllUsersScrollingListener());
+        mRecycler.addItemDecoration(itemDecoration);
     }
 
     @Override

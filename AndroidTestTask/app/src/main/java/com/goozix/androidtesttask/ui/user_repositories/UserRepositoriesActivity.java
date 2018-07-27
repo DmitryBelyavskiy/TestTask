@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
 public class UserRepositoriesActivity extends MvpAppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
         UserRepositoriesView, OnUserRepositoriesListClickListener {
@@ -60,9 +63,12 @@ public class UserRepositoriesActivity extends MvpAppCompatActivity implements Sw
 
 private void initRecycleView() {
 
+
     mRecycler.setLayoutManager(new LinearLayoutManager(this));
+    DividerItemDecoration itemDecoration=new DividerItemDecoration(this,VERTICAL );
     mAdapter = new RepositoriesAdapter(this);
     mRecycler.setAdapter(mAdapter);
+    mRecycler.addItemDecoration(itemDecoration);
 
 }
 

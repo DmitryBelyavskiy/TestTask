@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#75a1e7</color>
     <color name="colorPrimaryDark">#4787ef</color>
+    <color name="color_btn_other">#93b2e2</color>
     <color name="colorAccent">#b1c4ea</color>
     <color name="color_splash_text">#CC2D8FCC</color>
     <color name="color_mtext">#1b4383</color>

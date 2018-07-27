@@ -127,6 +127,8 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
         mEtNewCompany.setText(user.getCompany());
         mEtNewCompany.setHint(user.getCompany());
         if (TextUtils.isEmpty(user.getEmail())) {
+
+            mEtNewEmail.setHint(R.string.limited_by_privacy_settings);
             mEtNewEmail.setEnabled(false);
         } else {
             mEtNewEmail.setText(user.getEmail());
