@@ -9,18 +9,25 @@ import com.goozix.androidtesttask.mvp.model.user.User;
 public interface YourProfileFragmentView extends MvpView {
     @StateStrategyType(AddToEndStrategy.class)
     void changeVisibilityItems();
+
     @StateStrategyType(AddToEndStrategy.class)
     void showItemUserData(User user, boolean visible);
+
     @StateStrategyType(SkipStrategy.class)
     void showMessage(int messResId);
+
     @StateStrategyType(AddToEndStrategy.class)
     void showProgressBar();
+
     @StateStrategyType(AddToEndStrategy.class)
     void hideProgressBar();
+
     @StateStrategyType(AddToEndStrategy.class)
     void showLayoutProfile();
+
     @StateStrategyType(AddToEndStrategy.class)
     void backToAuthentication();
+
     @StateStrategyType(AddToEndStrategy.class)
     void openRepositoryList(String UserLogin);
 

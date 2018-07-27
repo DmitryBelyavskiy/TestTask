@@ -15,7 +15,6 @@ import com.goozix.androidtesttask.mvp.view.UpdateProfileView;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -26,73 +25,64 @@ public class UpdateProfileActivityPresenter extends BasePresenter<UpdateProfileV
     @Inject
     Model mModel;
 
-    User user;
-    UpdatedUser newUserData;
-
+    private User mUser;
+    private UpdatedUser mNewUserData;
 
     public UpdateProfileActivityPresenter(User user) {
-        this.user = user;
-        newUserData = new UpdatedUser(user.getName(), user.getCompany(), user.getEmail());
+        this.mUser = user;
+        mNewUserData = new UpdatedUser(user.getName(), user.getCompany(), user.getEmail());
         MyTestApplication.getAppComponent().inject(this);
-
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        getViewState().showCurrentUserData(user);
+        getViewState().showCurrentUserData(mUser);
     }
 
     public void usernameTextChanged(@NonNull String userName) {
-        newUserData.setName(userName.trim());
+        mNewUserData.setName(userName.trim());
         checkButtonState();
     }
 
     public void companyTextChanged(@NonNull String company) {
-        newUserData.setCompany(company.trim());
+        mNewUserData.setCompany(company.trim());
         checkButtonState();
     }
 
     public void emailTextChanged(@NonNull String email) {
-        newUserData.setEmail(email.trim());
+        mNewUserData.setEmail(email.trim());
         checkButtonState();
     }
 
     private void checkButtonState() {
-
-        if (validateFilds(newUserData.getEmail(), user.getEmail())) {
+        if (validateFields(mNewUserData.getEmail(), mUser.getEmail())) {
             getViewState().enableUpdateUserDataButton(true);
             return;
         }
-        if (validateFilds(newUserData.getName(), user.getName())) {
+        if (validateFields(mNewUserData.getName(), mUser.getName())) {
             getViewState().enableUpdateUserDataButton(true);
             return;
         }
-        if (validateFilds(newUserData.getCompany(), user.getCompany())) {
+        if (validateFields(mNewUserData.getCompany(), mUser.getCompany())) {
             getViewState().enableUpdateUserDataButton(true);
             return;
         }
-
         getViewState().enableUpdateUserDataButton(false);
-
     }
 
-    private boolean validateFilds(String newString, String oldString) {
+    private boolean validateFields(String newString, String oldString) {
         if (newString != null && oldString != null && !newString.equals(oldString)) {
-
             return true;
         } else if (oldString == null && !TextUtils.isEmpty(newString)) {
-
             return true;
         }
         return false;
     }
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     public void buttonUpdateProfileClicked() {
-        compositeDisposable.add(
-                mModel.updateUserProfile(mModel.getUserTokenFromPrefs(), newUserData)
+        unsubscribeOnDestroy(
+                mModel.updateUserProfile(mModel.getUserTokenFromPrefs(), mNewUserData)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(new Consumer<Disposable>() {
@@ -107,22 +97,14 @@ public class UpdateProfileActivityPresenter extends BasePresenter<UpdateProfileV
                                 getViewState().showMessage(R.string.user_profile_updated_successfully);
                                 getViewState().showUpdatedProfile(user);
                                 getViewState().hideProgressBar();
-
                             }
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 getViewState().showMessage(R.string.err_of_edit_profile_user);
                                 getViewState().hideProgressBar();
-
                             }
                         })
         );
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
     }
 }

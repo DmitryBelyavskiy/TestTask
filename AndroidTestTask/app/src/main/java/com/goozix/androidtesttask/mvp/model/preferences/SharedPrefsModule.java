@@ -26,7 +26,7 @@ public final class SharedPrefsModule {
         return mSharedPreferences.getString(PREF_USER_TOKEN, "");
     }
 
-    public void removeUserToken(){
+    public void removeUserToken() {
         mEditor.remove(PREF_USER_TOKEN);
         mEditor.apply();
     }

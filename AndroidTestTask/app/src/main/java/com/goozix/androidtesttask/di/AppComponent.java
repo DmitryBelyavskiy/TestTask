@@ -20,8 +20,6 @@ import dagger.Component;
 @Component(modules = {ContextModule.class, ModelModule.class})
 public interface AppComponent {
 
-    // Context getContext();
-
     void inject(SplashActivityPresenter splashPresenter);
 
     void inject(AuthActivityPresenter authActivityPresenter);

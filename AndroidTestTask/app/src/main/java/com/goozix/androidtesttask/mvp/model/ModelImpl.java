@@ -14,6 +14,7 @@ import com.goozix.androidtesttask.mvp.model.user.User;
 import java.util.List;
 
 import javax.inject.Inject;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -37,10 +38,10 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public Single<List<User>> getListUs(int lastUserId, @NonNull String login, int pageCount){
-        if(TextUtils.isEmpty(login)){
+    public Single<List<User>> getListUs(int lastUserId, @NonNull String login, int pageCount) {
+        if (TextUtils.isEmpty(login)) {
             return mApiInterface.getListUs(lastUserId);
-        }else{
+        } else {
             return mApiInterface.getFoundUs(login, pageCount)
                     .map(new Function<FoundUsers, List<User>>() {
                         @Override
@@ -53,24 +54,22 @@ public class ModelImpl implements Model {
 
     @Override
     public Single<List<Repository>> getListRepositories(String login) {
-        if(login!=null){//не авторизованный пользователь
+        if (login != null) {
             return mApiInterface.getNoAutUserRepositoriesList(login);
-        }else{// авторизованный пользователь
+        } else {
             return mApiInterface.getAutUserRepositoriesList(getUserTokenFromPrefs());//проверить чтобы так было в ост местах
         }
     }
 
     @Override
-    public Single<User>loadProfAuthUser(@NonNull String token){
+    public Single<User> loadProfAuthUser(@NonNull String token) {
         return mApiInterface.getUserProfile(token);
     }
 
     @Override
-    public Single<User>updateUserProfile(@NonNull String token, UpdatedUser newUserData){
+    public Single<User> updateUserProfile(@NonNull String token, UpdatedUser newUserData) {
         return mApiInterface.editUserProfile(token, newUserData);
     }
-
-
 
     @Override
     public void saveUserTokenInPrefs(String token) {
@@ -86,6 +85,5 @@ public class ModelImpl implements Model {
     public void removeUserToken() {
         mPrefModule.removeUserToken();
     }
-
 
 }

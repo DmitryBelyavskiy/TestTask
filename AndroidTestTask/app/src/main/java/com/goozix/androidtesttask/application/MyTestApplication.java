@@ -13,7 +13,6 @@ public class MyTestApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         buildAppComponent();
     }
 

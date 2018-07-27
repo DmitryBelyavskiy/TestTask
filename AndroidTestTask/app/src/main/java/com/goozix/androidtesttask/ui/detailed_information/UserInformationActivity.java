@@ -2,7 +2,6 @@ package com.goozix.androidtesttask.ui.detailed_information;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -13,12 +12,12 @@ import com.goozix.androidtesttask.mvp.presenter.UserInformationActivityPresenter
 import com.goozix.androidtesttask.mvp.view.UserInformationView;
 import com.goozix.androidtesttask.ui.basic_information.YourProfileFragment;
 
+import static com.goozix.androidtesttask.util.Constants.USER;
+
 public class UserInformationActivity extends MvpAppCompatActivity implements UserInformationView {
 
-    private static final String USER = "user";
-
     @InjectPresenter
-    UserInformationActivityPresenter presenter;
+    UserInformationActivityPresenter mPresenter;
 
     @ProvidePresenter
     UserInformationActivityPresenter provideUserInformationActivityPresenter() {
@@ -35,7 +34,6 @@ public class UserInformationActivity extends MvpAppCompatActivity implements Use
     public void loadFragmentProf(User user) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(USER, user);
-
         YourProfileFragment frag = new YourProfileFragment();
         frag.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

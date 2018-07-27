@@ -42,13 +42,10 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void setItemsList(@NonNull List<Repository> repositories) {
-        //тут не знаю что
         mUserRepositoriesList.clear();
         mUserRepositoriesList.addAll(repositories);
         notifyDataSetChanged();
-
     }
-
 
     class UserViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextName;
@@ -67,8 +64,6 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         void bind(final Repository repository) {
             mTextName.setText(repository.getName());
             mTextDescription.setText(repository.getDescription());
-
-            //itemView.setOnClickListener(new View.OnClickListener() {
             mButtonOpenInBrowser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

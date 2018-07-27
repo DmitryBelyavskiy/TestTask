@@ -34,17 +34,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
-import static android.text.TextUtils.isEmpty;
+import static com.goozix.androidtesttask.util.Constants.LOGIN;
+import static com.goozix.androidtesttask.util.Constants.NULL_FIELD;
+import static com.goozix.androidtesttask.util.Constants.REQUEST_CODE;
+import static com.goozix.androidtesttask.util.Constants.USER;
 
 public class YourProfileFragment extends MvpAppCompatFragment implements YourProfileFragmentView {
 
-    private static final String USER = "user";
-    private static final String NULL_FIELD = "Empty";
-    private static final String LOGIN = "Login"; //вытащить в отдельный фал
-    private static final int REQUEST_CODE = 1; //вытащить в отдельный фал
-
     @InjectPresenter
-    YourProfileFragmentPresenter presenter;
+    YourProfileFragmentPresenter mPresenter;
 
     @BindView(R.id.image_avatar_prof)
     ImageView mImageAva;
@@ -63,7 +61,7 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     @BindView(R.id.text_own_pr_rep_con)
     TextView mTvCountOwnRepos;
     @BindView(R.id.bt_open_repos)
-    Button mBtOpenRepos;
+    Button mBtnOpenRepos;
     @BindView(R.id.bt_edit_profile)
     Button mBtnEditProfile;
 
@@ -93,7 +91,6 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
         }
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,34 +100,27 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // setHasOptionsMenu(true);//для логаута
         ButterKnife.bind(this, view);
-        mBtOpenRepos.setOnClickListener(oclBtnOpenRepos);
+        mBtnOpenRepos.setOnClickListener(oclBtnOpenRepos);
         mBtnEditProfile.setOnClickListener(oclBtnEditProfile);
     }
 
     @Override
     public void changeVisibilityItems() {
         mLlPrivateInfo.setVisibility(View.VISIBLE);
-//        mLlGist.setVisibility(View.VISIBLE);
-//        mLlPrivateTotalRepositoryCount.setVisibility(View.VISIBLE);
-//        mLlOwnedPrivateRepositoriesCount.setVisibility(View.VISIBLE);
         mLlBtnEditProfile.setVisibility(View.VISIBLE);
         mBtnEditProfile.setEnabled(true);
     }
 
     @Override
     public void showItemUserData(User user, boolean visible) {
-        //устанавливаем соответствующие значения
         Glide.with(this).load(user.getAvatarUrl()).into(mImageAva);
         mTvLogin.setText(user.getLogin());
         mTvName.setText((user.getName()));
-
         mTvName.setText(checkFieldForEmpty(user.getName()));
         mTvCompany.setText(checkFieldForEmpty(user.getCompany()));
         mTvEmail.setText(checkFieldForEmpty(user.getEmail()));
-
-        if (visible) {//доп параметры для авторизованного пользователя
+        if (visible) {
             mTvGist.setText(String.valueOf(user.getPrivateGists()));
             mTvCountRepos.setText(String.valueOf(user.getTotalPrivateRepos()));
             mTvCountOwnRepos.setText(String.valueOf(user.getOwnedPrivateRepos()));
@@ -151,7 +141,6 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     @Override
     public void hideProgressBar() {
         mLoadingIndicator.setVisibility(View.GONE);
-
     }
 
     @Override
@@ -172,14 +161,13 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.item_logout, menu);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.item_logout) {
-            presenter.logout();
+            mPresenter.logout();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -192,7 +180,7 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
     View.OnClickListener oclBtnOpenRepos = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            presenter.buttonRepositoryListClicked();
+            mPresenter.buttonRepositoryListClicked();
         }
     };
 
@@ -207,26 +195,24 @@ public class YourProfileFragment extends MvpAppCompatFragment implements YourPro
 
     @Override
     public void openEditProfileScreen(User user) {
-
-        Intent intent=new Intent(getContext(),UpdateProfileActivity.class);
-        intent.putExtra(USER,user);
+        Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
+        intent.putExtra(USER, user);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-if(resultCode==RESULT_OK && requestCode==REQUEST_CODE) {
-    User user = data.getParcelableExtra(USER);
-    presenter.updateProfile(user);
-}
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            User user = data.getParcelableExtra(USER);
+            mPresenter.updateProfile(user);
+        }
     }
 
     View.OnClickListener oclBtnEditProfile = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-             presenter.buttonEditProfileClicked();
+            mPresenter.buttonEditProfileClicked();
         }
     };
 }

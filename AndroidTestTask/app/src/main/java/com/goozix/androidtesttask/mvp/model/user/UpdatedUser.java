@@ -16,6 +16,7 @@ public class UpdatedUser {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
@@ -23,9 +24,11 @@ public class UpdatedUser {
     public void setCompany(String company) {
         this.company = company;
     }
+
     public String getCompany() {
         return company;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }

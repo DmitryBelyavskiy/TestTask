@@ -6,9 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class User implements Parcelable{
+public class User implements Parcelable {
     @SerializedName("login")
     @Expose
     private String login;
@@ -466,11 +464,9 @@ public class User implements Parcelable{
     }
 
     public User() {
-
-            name="";
-            company="";
-            email="";
-
+        name = "";
+        company = "";
+        email = "";
     }
 
     protected User(Parcel in) {

@@ -2,7 +2,6 @@ package com.goozix.androidtesttask.mvp.presenter;
 
 
 import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
 import com.goozix.androidtesttask.application.MyTestApplication;
 import com.goozix.androidtesttask.mvp.model.Model;
 import com.goozix.androidtesttask.mvp.view.SplashView;
@@ -22,13 +21,12 @@ public class SplashActivityPresenter extends BasePresenter<SplashView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
 
-        if(mModel.getUserTokenFromPrefs().equals("")){
-            //getViewState().skipAuthScreen();
+        if (mModel.getUserTokenFromPrefs().equals("")) {
+
             getViewState().openAuthScreen();
-        }
-        else{
+        } else {
             getViewState().skipAuthScreen();
-            //getViewState().openStartScreen();
+
         }
     }
 

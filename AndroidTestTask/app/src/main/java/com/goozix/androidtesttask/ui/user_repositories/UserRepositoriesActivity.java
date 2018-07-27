@@ -24,27 +24,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
+import static com.goozix.androidtesttask.util.Constants.LOGIN;
 
 public class UserRepositoriesActivity extends MvpAppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
         UserRepositoriesView, OnUserRepositoriesListClickListener {
-    private static final String LOGIN = "Login";//вытащить в отдельный файл
 
     @InjectPresenter
-    UserRepositoriesActivityPresenter presenter;
+    UserRepositoriesActivityPresenter mPresenter;
 
     @BindView(R.id.recycler_user_repositories)
     RecyclerView mRecycler;
     @BindView(R.id.swipe_refresh_layout_repositories_list)
     SwipeRefreshLayout mSwipeRefresh;
 
-    private LinearLayoutManager mLayoutManager;
     private RepositoriesAdapter mAdapter;
 
     @ProvidePresenter
-    UserRepositoriesActivityPresenter provideUserRepositoriesActivityPresenter(){//изменить в названии в других использованиях
-            return new UserRepositoriesActivityPresenter(
-                    getIntent()!=null?
-                            getIntent().getStringExtra(LOGIN):null);
+    UserRepositoriesActivityPresenter provideUserRepositoriesActivityPresenter() {//изменить в названии в других использованиях
+        return new UserRepositoriesActivityPresenter(
+                getIntent() != null ?
+                        getIntent().getStringExtra(LOGIN) : null);
     }
 
     @Override
@@ -58,19 +57,16 @@ public class UserRepositoriesActivity extends MvpAppCompatActivity implements Sw
 
     @Override
     public void onRefresh() {
-        presenter.refreshCalled();
+        mPresenter.refreshCalled();
     }
 
-private void initRecycleView() {
-
-
-    mRecycler.setLayoutManager(new LinearLayoutManager(this));
-    DividerItemDecoration itemDecoration=new DividerItemDecoration(this,VERTICAL );
-    mAdapter = new RepositoriesAdapter(this);
-    mRecycler.setAdapter(mAdapter);
-    mRecycler.addItemDecoration(itemDecoration);
-
-}
+    private void initRecycleView() {
+        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, VERTICAL);
+        mAdapter = new RepositoriesAdapter(this);
+        mRecycler.setAdapter(mAdapter);
+        mRecycler.addItemDecoration(itemDecoration);
+    }
 
     private void initSwipeRefreshLayout() {
         mSwipeRefresh.setOnRefreshListener(this);
@@ -91,13 +87,13 @@ private void initRecycleView() {
     }
 
     @Override
-    public void showUserRepositoriesList(List<Repository> repositories){
+    public void showUserRepositoriesList(List<Repository> repositories) {
         mAdapter.setItemsList(repositories);
     }
 
     @Override
     public void openUserRepositoriesInBrowser(String url) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
     @Override

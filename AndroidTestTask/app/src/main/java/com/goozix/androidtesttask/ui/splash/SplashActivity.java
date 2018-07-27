@@ -15,8 +15,7 @@ import com.goozix.androidtesttask.ui.basic_information.BaseInfActivity;
 public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
     @InjectPresenter
-    SplashActivityPresenter presenter;
-
+    SplashActivityPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,6 @@ public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
             }
         }, 1 * 1000);
-//        startActivity(new Intent(this, AuthActivity.class));
-//        finish();
     }
 
     @Override

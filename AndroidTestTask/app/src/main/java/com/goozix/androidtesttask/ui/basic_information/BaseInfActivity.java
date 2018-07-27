@@ -1,28 +1,25 @@
 package com.goozix.androidtesttask.ui.basic_information;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.goozix.androidtesttask.R;
 import com.goozix.androidtesttask.mvp.presenter.BaseInfActivityPresenter;
 import com.goozix.androidtesttask.mvp.view.BaseInfActivityView;
-import com.goozix.androidtesttask.ui.detailed_information.UserInformationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BaseInfActivity extends MvpAppCompatActivity implements BaseInfActivityView{
+public class BaseInfActivity extends MvpAppCompatActivity implements BaseInfActivityView {
 
     @InjectPresenter
-    BaseInfActivityPresenter presenter;
+    BaseInfActivityPresenter mPresenter;
 
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
@@ -49,7 +46,7 @@ public class BaseInfActivity extends MvpAppCompatActivity implements BaseInfActi
         private static final int YOUR_PROFILE_TAB = 1;
         private int mTabsCount;
 
-        public PagerAdapter(FragmentManager fm, int tabCount) {
+        private PagerAdapter(FragmentManager fm, int tabCount) {
             super(fm);
             mTabsCount = tabCount;
         }

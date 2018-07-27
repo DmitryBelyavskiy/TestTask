@@ -12,29 +12,21 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
 
 @InjectViewState
 public class UserRepositoriesActivityPresenter extends BasePresenter<UserRepositoriesView> {
     @Inject
     Model mModel;
-    private String login;
+    private String mLogin;
 
     public UserRepositoriesActivityPresenter(String loginUser) {
         MyTestApplication.getAppComponent().inject(this);
-        this.login=loginUser;
+        this.mLogin = loginUser;
     }
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-    }
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
@@ -42,8 +34,8 @@ public class UserRepositoriesActivityPresenter extends BasePresenter<UserReposit
     }
 
     private void loadRepositoriesList() {
-        compositeDisposable.add(
-                mModel.getListRepositories(login)
+        unsubscribeOnDestroy(
+                mModel.getListRepositories(mLogin)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(new Consumer<Disposable>() {
@@ -68,11 +60,9 @@ public class UserRepositoriesActivityPresenter extends BasePresenter<UserReposit
                             }
                         })
         );
-
     }
 
     public void refreshCalled() {
         loadRepositoriesList();
     }
-
 }

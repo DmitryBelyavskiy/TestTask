@@ -21,7 +21,6 @@ public class RecyclerUsersListAdapter extends RecyclerView.Adapter<RecyclerView.
     private List<User> mUsersList = new ArrayList<>();
     private OnUsersListClickListener mListener;
 
-
     RecyclerUsersListAdapter(OnUsersListClickListener listener) {
         mListener = listener;
     }
@@ -37,11 +36,12 @@ public class RecyclerUsersListAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((UserViewHolder) holder).bind(mUsersList.get(position));
     }
-    void clearUsersList() {
 
+    void clearUsersList() {
         mUsersList.clear();
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return mUsersList.size();
@@ -49,15 +49,14 @@ public class RecyclerUsersListAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public void setItemsList(@NonNull List<User> itemsList, boolean clear) {
         if (!clear) {
-            int pos=mUsersList.size();
+            int pos = mUsersList.size();
             mUsersList.addAll(itemsList);
-            notifyItemRangeInserted(pos,itemsList.size());
+            notifyItemRangeInserted(pos, itemsList.size());
         } else {
             mUsersList.clear();
             mUsersList.addAll(itemsList);
             notifyDataSetChanged();
         }
-
     }
 
     class UserViewHolder extends RecyclerView.ViewHolder {
@@ -82,8 +81,7 @@ public class RecyclerUsersListAdapter extends RecyclerView.Adapter<RecyclerView.
                     if (getAdapterPosition() == RecyclerView.NO_POSITION) {
                         return;
                     }
-                    mListener.openUserInformation(user);//можно передать user и потом в активити передать юзера
-                    //mListener.openUserInformation(user.getLogin());//можно передать user и потом в активити передать юзера
+                    mListener.openUserInformation(user);
                 }
             });
         }

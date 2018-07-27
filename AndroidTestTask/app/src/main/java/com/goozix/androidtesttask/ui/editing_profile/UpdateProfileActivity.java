@@ -26,12 +26,12 @@ import com.goozix.androidtesttask.mvp.view.UpdateProfileView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.goozix.androidtesttask.util.Constants.USER;
+
 public class UpdateProfileActivity extends MvpAppCompatActivity implements UpdateProfileView {
 
-    private static final String USER = "user";
-
     @InjectPresenter
-    UpdateProfileActivityPresenter presenter;
+    UpdateProfileActivityPresenter mPresenter;
 
     @BindView(R.id.image_avatar_ed_prof)
     ImageView mImageAvatar;
@@ -47,7 +47,6 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
 
     private MenuItem mItemUpdate;
 
-
     @ProvidePresenter
     UpdateProfileActivityPresenter provideUpdateProfileActivityPresenter() {
         return new UpdateProfileActivityPresenter((User) getIntent().getParcelableExtra(USER));
@@ -59,39 +58,35 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
         setContentView(R.layout.activity_update_profile);
         ButterKnife.bind(this);
         setListeners();
-
     }
 
     void setListeners() {
         mEtNewName.addTextChangedListener(addTextWatcher(mEtNewName));
         mEtNewCompany.addTextChangedListener(addTextWatcher(mEtNewCompany));
         mEtNewEmail.addTextChangedListener(addTextWatcher(mEtNewEmail));
-
     }
 
     private TextWatcher addTextWatcher(final EditText editText) {
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 switch (editText.getId()) {
                     case R.id.et_new_name:
-                        presenter.usernameTextChanged(s.toString());
+                        mPresenter.usernameTextChanged(s.toString());
                         break;
                     case R.id.et_new_company:
-                        presenter.companyTextChanged(s.toString());
+                        mPresenter.companyTextChanged(s.toString());
                         break;
                     case R.id.et_new_email:
-                        presenter.emailTextChanged(s.toString());
+                        mPresenter.emailTextChanged(s.toString());
                         break;
                 }
             }
@@ -110,7 +105,7 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_ok:
-                presenter.buttonUpdateProfileClicked();
+                mPresenter.buttonUpdateProfileClicked();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -123,11 +118,9 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
         Glide.with(this).load(user.getAvatarUrl()).into(mImageAvatar);
         mEtNewName.setText(user.getName());
         mEtNewName.setHint(user.getName());
-
         mEtNewCompany.setText(user.getCompany());
         mEtNewCompany.setHint(user.getCompany());
         if (TextUtils.isEmpty(user.getEmail())) {
-
             mEtNewEmail.setHint(R.string.limited_by_privacy_settings);
             mEtNewEmail.setEnabled(false);
         } else {
@@ -165,6 +158,4 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
     public void hideProgressBar() {
         mLoadingIndicator.setVisibility(View.GONE);
     }
-
-
 }
