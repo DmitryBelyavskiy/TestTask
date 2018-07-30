@@ -40,6 +40,9 @@
     <string name="err_of_edit_profile_user">Error changing user profile</string>
     <string name="user_profile_updated_successfully">User profile updated successfully</string>
     <string name="limited_by_privacy_settings">Limited by privacy settings</string>
+    <string name="user_profile_screen_name">User profile</string>
+    <string name="repositories_screen_name">Repositories</string>
+    <string name="edit_profile_screen_name">Edit profile</string>
 
 
 </resources>

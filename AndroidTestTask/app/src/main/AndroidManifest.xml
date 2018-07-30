@@ -29,9 +29,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.detailed_information.UserInformationActivity"
+            android:label="@string/user_profile_screen_name"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.user_repositories.UserRepositoriesActivity" />
-        <activity android:name=".ui.editing_profile.UpdateProfileActivity"></activity>
+        <activity android:name=".ui.user_repositories.UserRepositoriesActivity"
+            android:label="@string/repositories_screen_name"/>
+        <activity android:name=".ui.editing_profile.UpdateProfileActivity"
+            android:label="@string/edit_profile_screen_name"/>
     </application>
 
 </manifest>
