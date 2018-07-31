@@ -2,6 +2,7 @@ package com.goozix.androidtesttask.ui.detailed_information;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.MenuItem;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -28,6 +29,25 @@ public class UserInformationActivity extends MvpAppCompatActivity implements Use
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
+        setupToolbar();
+    }
+
+    private void setupToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -37,7 +57,7 @@ public class UserInformationActivity extends MvpAppCompatActivity implements Use
         YourProfileFragment frag = new YourProfileFragment();
         frag.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fram_fr, frag);
+        ft.add(R.id.fragment_profile, frag);
         ft.commit();
     }
 }

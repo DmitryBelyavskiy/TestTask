@@ -58,6 +58,14 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
         setContentView(R.layout.activity_update_profile);
         ButterKnife.bind(this);
         setListeners();
+        setupToolbar();
+    }
+
+    private void setupToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     void setListeners() {
@@ -106,6 +114,9 @@ public class UpdateProfileActivity extends MvpAppCompatActivity implements Updat
         switch (item.getItemId()) {
             case R.id.item_ok:
                 mPresenter.buttonUpdateProfileClicked();
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
