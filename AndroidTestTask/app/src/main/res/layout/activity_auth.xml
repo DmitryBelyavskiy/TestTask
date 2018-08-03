@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.authentication.AuthActivity">
 
@@ -41,7 +42,6 @@
                     android:textColorHint="@color/color_mtext_hint"
                     android:textSize="15sp" />
             </android.support.design.widget.TextInputLayout>
-
         </LinearLayout>
 
         <View
@@ -60,7 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/text_password"
-                android:textColorHint="@color/color_mtext">
+                android:textColorHint="@color/color_mtext"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorPrimary">
 
                 <EditText
                     android:id="@+id/et_password_text"
