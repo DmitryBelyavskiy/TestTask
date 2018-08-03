@@ -1,18 +1,60 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.goozix.androidtesttask"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+//    signingConfigs {
+//
+//        Properties keyProps=new Properties()
+//        keyProps.load(new FileInputStream(file('../keystore.properties')))
+//        debug {
+//            storeFile file(keyProps["debug.storeFile"])
+//            keyAlias keyProps["debug.keyAlias"]
+//            storePassword keyProps["debug.storePassword"]
+//            keyPassword keyProps["debug.keyPassword"]
+//        }
+//        release {
+//            storeFile file(keyProps["release.storeFile"])
+//            keyAlias keyProps["release.keyAlias"]
+//            storePassword keyProps["release.storePassword"]
+//            keyPassword keyProps["release.keyPassword"]
+//        }
+//    }
+    signingConfigs {
+
+
+        debug {
+            storeFile file('../../Doc/simplekeyaliasdeb.jks')
+            keyAlias "simplekeyaliasdeb"
+            storePassword "27819qw3e1r"
+            keyPassword "27819qw3e1r"
+        }
         release {
+            storeFile file('../../Doc/simplekeyaliasrel.jks')
+            keyAlias "simplekeyaliasrel"
+            storePassword "349q85w766e"
+            keyPassword "349q85w766e"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            debuggable true
             minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
